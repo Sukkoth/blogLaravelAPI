@@ -17,6 +17,7 @@ class BlogController extends Controller
             ->paginate(8);
         // $blogs = Blog::limit((int) $request->query('limit') ?: null)->with(['category:id,name', 'author:id,user_name,first_name,last_name,avatar'])->get();
         return response()->json([
+            'here' => 'why',
             "blogs" => $blogs
         ]);
     }

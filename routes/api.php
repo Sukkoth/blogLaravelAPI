@@ -34,7 +34,6 @@ Route::prefix('blogs')->group(function () {
         Route::patch('/{blog}', [BlogController::class, 'update']);
         Route::delete('/{blog}', [BlogController::class, 'delete']);
     });
-
 });
 
 Route::prefix('categories')->group(function () {
@@ -42,9 +41,9 @@ Route::prefix('categories')->group(function () {
 });
 
 /**
- * BLOG CONTROLLER 
+ * BLOG CONTROLLER
  * THE MAIN FUNCTIONS
- * POPULAR 
- * RECENT 
- * AUTHOR CONTROLLER 
+ * POPULAR
+ * RECENT
+ * AUTHOR CONTROLLER
  */
