@@ -13,7 +13,7 @@ class AuthController extends Controller
     {
         $request->validate([
             "email" => 'required',
-            "password" => "required"
+            "password" => 'required',
         ]);
 
         if (!Auth::attempt(['email' => $request->email, 'password' => $request->password]))
@@ -42,6 +42,7 @@ class AuthController extends Controller
         $user = User::create([
             "user_name" => $request->input('user_name'),
             "password" => Hash::make($request->input('password')),
+            "email" => $request->input('email'),
             "phone" => $request->input('phone')
         ]);
 
