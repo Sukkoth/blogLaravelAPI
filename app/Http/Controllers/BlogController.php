@@ -14,12 +14,28 @@ class BlogController extends Controller
     {
 
         $blogs = QueryBuilder::for (Blog::class)
-            ->paginate(8);
-        // $blogs = Blog::limit((int) $request->query('limit') ?: null)->with(['category:id,name', 'author:id,user_name,first_name,last_name,avatar'])->get();
+            ->paginate(4);
+
         return response()->json([
-            'here' => 'why',
-            "blogs" => $blogs
+            "blogs" => $blogs->items(),
+            "pagination" => [
+                "current_page" => $blogs->currentPage(),
+                "last_page" => $blogs->lastPage(),
+                "per_page" => $blogs->perPage(),
+                "total" => $blogs->total(),
+            ]
         ]);
+    }
+
+    public function suggestions(Request $request)
+    {
+        $limit = (int) $request->query('limit') ?: 5;
+        $blogs = Blog::inRandomOrder()->limit($limit)->get();
+        return response()->json([
+
+            "blogs" => $blogs,
+            "limit" => (int) $request->query('limit') ?: 5
+        ], 200);
     }
 
     public function store(BlogStoreRequest $request)
@@ -41,7 +57,7 @@ class BlogController extends Controller
     public function update(Blog $blog)
     {
         return response()->json([
-            "blog" => $blog
+            "blog" => $blog,
         ]);
     }
 
