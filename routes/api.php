@@ -29,6 +29,7 @@ Route::prefix('auth')->group(function () {
 
 Route::prefix('blogs')->group(function () {
     Route::get('/', [BlogController::class, 'index']);
+    Route::get('/{blogId}', [BlogController::class, 'view']);
     Route::get('/suggestions', [BlogController::class, 'suggestions']);
     Route::middleware('auth:api')->group(function () {
         Route::post('/', [BlogController::class, 'store']);
@@ -39,6 +40,7 @@ Route::prefix('blogs')->group(function () {
 
 Route::prefix('categories')->group(function () {
     Route::get('/', [CategoryController::class, 'index']);
+    Route::get('/{category}/blogs', [CategoryController::class, 'getBlogs']);
 });
 
 /**
