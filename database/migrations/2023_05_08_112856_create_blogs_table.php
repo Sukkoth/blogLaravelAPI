@@ -17,6 +17,7 @@ class CreateBlogsTable extends Migration
             $table->id()->unique();
             $table->string('title', 100);
             $table->string('sub_title', 255);
+            $table->string('cover')->default('https://picsum.photos/770/340')->nullable();
             $table->text('body');
             $table->foreignId('category_id')->nullable()->index()->constrained()->nullOnDelete();
             $table->foreignId('user_id')->nullable()->index()->constrained()->nullOnDelete();

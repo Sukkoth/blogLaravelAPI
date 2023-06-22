@@ -13,9 +13,7 @@ class BlogController extends Controller
 {
     public function index(Request $request)
     {
-
-
-        $blogs = QueryBuilder::for (Blog::class)->whereHas('category')
+        $blogs = QueryBuilder::for(Blog::class)->whereHas('category')
             ->allowedFilters([
                 AllowedFilter::exact('id'),
                 AllowedFilter::exact('category.name'),
@@ -34,14 +32,6 @@ class BlogController extends Controller
         ]);
     }
 
-    public function view($blogId)
-    {
-        $blog = Blog::where('id', $blogId)->with(['author', 'category'])->first();
-        return response()->json([
-            'blog' => $blog,
-        ], 200);
-    }
-
     public function suggestions(Request $request)
     {
         $limit = (int) $request->query('limit') ?: 5;
@@ -51,6 +41,16 @@ class BlogController extends Controller
             "limit" => (int) $request->query('limit') ?: 5
         ], 200);
     }
+
+    public function view($blogId)
+    {
+        $blog = Blog::where('id', $blogId)->with(['author', 'category'])->first();
+        return response()->json([
+            'blog' => $blog,
+            "hi" => "view"
+        ], 200);
+    }
+
 
     public function store(BlogStoreRequest $request)
     {
@@ -78,7 +78,7 @@ class BlogController extends Controller
     public function delete(Blog $blog)
     {
         return response()->json([
-            "blog" => $blog
+            "blog" => $blog,
         ]);
 
     }

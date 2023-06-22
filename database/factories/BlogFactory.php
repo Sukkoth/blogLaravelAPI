@@ -19,6 +19,7 @@ class BlogFactory extends Factory
             'body' => $this->faker->realText(800),
             "category_id" => $this->faker->numberBetween(2, 5),
             "user_id" => $this->faker->numberBetween(2, 5),
+            "cover" => 'https://picsum.photos/770/340'
         ];
     }
 }
